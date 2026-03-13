@@ -7,9 +7,11 @@ const swaggerDocument = require('./swagger-output.json');
 const app = express();
 
 const port = process.env.PORT || 3000;
-
+const domain = process.env.DOMAIN || 'localhost'
+const isDevelopment = process.env.ENV == 'development';
+const origin = isDevelopment ?  `http://${domain}:${port}` : `https://${domain}`;
 var corsOptions = {
-    origin: "http://localhost:8081"
+    origin: origin
 };
 
 app.use(cors(corsOptions));
