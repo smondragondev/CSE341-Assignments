@@ -1,10 +1,7 @@
 const routes = require('express').Router();
 const burialRecords = require('./burial-records');
-
-routes.get('/', (req,res)=> {
-    res.send("Hello World!");
-})
+const swagger = require('./swagger');
 
 routes.use('/burial-records', burialRecords);
-
+routes.use('/api-docs', swagger)
 module.exports = routes;

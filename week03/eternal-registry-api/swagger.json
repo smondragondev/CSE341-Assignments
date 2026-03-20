@@ -1,0 +1,209 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Burial Record API",
+    "description": "This API is a CRUD of Burial Records",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/burial-records/": {
+      "get": {
+        "tags": [
+          "Burial Records"
+        ],
+        "summary": "Find all the burial records",
+        "description": "It retrieves data from the burial records",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Burial Records"
+        ],
+        "summary": "Create a Burial Record",
+        "description": "Create a new a Burial Record",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Create a new Burial Record.",
+            "schema": {
+              "$ref": "#/definitions/CreateAddBurialRecord"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/burial-records/{id}": {
+      "get": {
+        "tags": [
+          "Burial Records"
+        ],
+        "summary": "Find a record by ID",
+        "description": "It retrieves data from the burial records using the ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Burial Records"
+        ],
+        "summary": "Update a Burial Record",
+        "description": "Update data from the burial record",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update a new Burial Record.",
+            "schema": {
+              "$ref": "#/definitions/CreateAddBurialRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Burial Records"
+        ],
+        "summary": "Delete a Burial Record",
+        "description": "Delete a Burial Record using the ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api-docs/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CreateAddBurialRecord": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "example": "Margaret"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Thatcher"
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "example": "1928-04-15"
+        },
+        "dateOfDeath": {
+          "type": "string",
+          "example": "2023-11-02"
+        },
+        "intermentDate": {
+          "type": "string",
+          "example": "2023-11-08"
+        },
+        "cemeteryName": {
+          "type": "string",
+          "example": "Rosewood Cemetery"
+        },
+        "section": {
+          "type": "string",
+          "example": "Heritage Row"
+        },
+        "block": {
+          "type": "string",
+          "example": "C"
+        },
+        "lotNumber": {
+          "type": "number",
+          "example": 154
+        },
+        "graveNumber": {
+          "type": "number",
+          "example": 4
+        },
+        "lat": {
+          "type": "number",
+          "example": 1.123
+        },
+        "lng": {
+          "type": "number",
+          "example": -1.232
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName",
+        "dateOfDeath",
+        "cemeteryName",
+        "section",
+        "block"
+      ]
+    }
+  }
+}

@@ -7,7 +7,7 @@ exports.adaptBodyToBurialSchema = (req) => {
         intermentDate: req.body.intermentDate
     };
     const location = {
-        cemetaryName: req.body.cemetaryName,
+        cemeteryName: req.body.cemeteryName,
         section: req.body.section,
         block: req.body.block,
         lotNumber: req.body.lotNumber,
