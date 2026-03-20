@@ -1,0 +1,82 @@
+[
+  {
+    "deceased": {
+      "firstName": "Margaret",
+      "lastName": "Thatcher",
+      "dateOfBirth": "1928-04-15",
+      "dateOfDeath": "2023-11-02",
+      "intermentDate": "2023-11-08"
+    },
+    "location": {
+      "cemeteryName": "Rosewood Cemetery",
+      "section": "Heritage Row",
+      "block": "C",
+      "lotNumber": "154",
+      "graveNumber": "4"
+    }
+  },
+  {
+    "deceased": {
+      "firstName": "Julian",
+      "lastName": "Ross",
+      "dateOfBirth": "1965-09-30",
+      "dateOfDeath": "2024-01-12",
+      "intermentDate": "2024-01-18"
+    },
+    "location": {
+      "cemeteryName": "Mountain View Park",
+      "section": "Highlands",
+      "block": "H-2",
+      "lotNumber": "12",
+      "graveNumber": "1"
+    }
+  },
+  {
+    "deceased": {
+      "firstName": "Lydia",
+      "lastName": "Chen",
+      "dateOfBirth": "1940-01-01",
+      "dateOfDeath": "2023-10-25",
+      "intermentDate": "2023-11-01"
+    },
+    "location": {
+      "cemeteryName": "Evergreen Gardens",
+      "section": "Lotus Pond",
+      "block": "East-4",
+      "lotNumber": "505",
+      "graveNumber": "B"
+    }
+  },
+  {
+    "deceased": {
+      "firstName": "Marcus",
+      "lastName": "Dixon",
+      "dateOfBirth": "1972-06-18",
+      "dateOfDeath": "2024-02-14",
+      "intermentDate": "2024-02-21"
+    },
+    "location": {
+      "cemeteryName": "St. Jude’s Parish",
+      "section": "Old Grounds",
+      "block": "North-A",
+      "lotNumber": "99",
+      "graveNumber": "3"
+    }
+  },
+  {
+    "deceased": {
+      "firstName": "Sonia",
+      "lastName": "Gomez",
+      "dateOfBirth": "1955-12-10",
+      "dateOfDeath": "2024-03-01",
+      "intermentDate": "2024-03-07"
+    },
+    "location": {
+      "cemeteryName": "Valley View Memorial",
+      "section": "Sunrise Terrace",
+      "block": "ST-9",
+      "lotNumber": "442",
+      "graveNumber": "10"
+    }
+  }
+]

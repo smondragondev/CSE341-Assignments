@@ -1,18 +1,89 @@
 const db = require('../models');
+const { adaptBodyToBurialSchema } = require('../utils');
+const ObjectId = require("mongodb").ObjectId;
 const BurialRecord = db.burialRecords;
 
 exports.findAll = async (req,res) =>{
-    await BurialRecord.find(
-        {},
-    ).
-    select({
-        deceased: 1,
-        location: 1
-    }).then( (data) => {
-        res.send(data);
+    await BurialRecord.find().
+    then( (data) => {
+        res.status(200).send(data);
     }).catch((err) => {
         res.status(500).send({
-            message: err.message || 'Some error ocurred while retrieving '
+            message: err.message || 'Some error ocurred while retrieving burial records.'
         })
-    })
+    });
+};
+
+exports.findById = async (req,res) => {
+    const id = req.params.id;
+    const burialId = new ObjectId(id);
+    const filter = {
+        '_id': burialId,
+    }
+    await BurialRecord.findOne(filter).
+    then( (data) => {
+        res.status(200).send(data);
+    }).catch((err) => {
+        res.status(500).send({
+            message: err.message || 'Some error ocurred while retrieving burial records.'
+        })
+    });
+};
+
+exports.create = async (req, res) => {
+    const burialRecord = BurialRecord(
+        adaptBodyToBurialSchema(req),
+    )
+    await burialRecord.save().
+    then( (data) => {
+        res.status(201).send(data);
+    }).catch((err) => {
+        res.status(500).send({
+            message: err.message || 'Some error ocurred while creating burial record.'
+        })
+    });
 }
+
+exports.update = async (req, res) => {
+    const id = req.params.id;
+    const burialId = new ObjectId(id);
+    const filter = {'_id':burialId};
+    const updatedBurial = adaptBodyToBurialSchema(req);
+    await BurialRecord.findOneAndUpdate(
+        filter,
+        updatedBurial,
+        {
+            returnDocument: 'after'
+        }
+    ).then(
+        (data) => {
+            res.status(200).send(data);
+        }
+    ).catch(
+        (err) => {
+            res.status(500).send({
+                message: err.message || 'Some error ocurred while updating burial record.'
+            })
+        }
+    )
+}
+
+exports.deleteOne = async (req, res) => {
+    const id = req.params.id;
+    const burialId = new ObjectId(id);
+    const filter = {'_id':burialId};
+    await BurialRecord.deleteOne(
+        filter,
+        burialId
+    ).then(
+        (data) => {
+            res.status(204).send(data);
+        }
+    ).catch(
+        (err) => {
+            res.status(500).send({
+                message: err.message || 'Some error ocurred while updating burial record.'
+            })
+        }
+    )
+};

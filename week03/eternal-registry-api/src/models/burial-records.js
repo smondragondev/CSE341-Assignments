@@ -22,7 +22,7 @@ const locationSchema = new Schema({
     graveNumber: String,
     coordinates: {
         lat: Number,
-        log: Number
+        lng: Number
     }
 });
 
@@ -34,8 +34,8 @@ const burialSchema = new Schema({
 
 module.exports = (mongoose) => {
     const BurialRecord = mongoose.model(
-        'BurialRecords',
-        deceasedSchema,
+        'burialRecords',
+        burialSchema,
     )
     return BurialRecord;
 };
