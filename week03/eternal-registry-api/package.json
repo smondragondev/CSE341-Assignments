@@ -1,19 +1,18 @@
 {
-  "name": "week01",
+  "name": "eternal-registry-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Eternal Registry API for managing the information of people who have passed away and they are located in a local cemetery.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "swagger": "node ./swagger.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Sergio Mondragon",
+  "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.6.5",
   "dependencies": {
-    "bodyc-parser": "^2.2.2",
+    "body-parser": "^2.2.2",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
