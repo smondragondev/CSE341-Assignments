@@ -1,10 +1,11 @@
 const routes = require('express').Router();
 const { findAll, findById, create, update, deleteOne } = require('../controllers/burial-records');
+const { burialRecordValidationRules, validate } = require('../utils/validators');
 
 routes.get('/', findAll);
 routes.get('/:id', findById);
-routes.post('/', create);
-routes.put('/:id', update);
+routes.post('/', burialRecordValidationRules(),validate, create);
+routes.put('/:id',burialRecordValidationRules(),validate, update);
 routes.delete('/:id', deleteOne);
 
 module.exports = routes;

@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const createError = require('http-errors')
 dotenv.config();
 
 const app = express();
@@ -24,14 +25,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/', require('./src/routes'));
 
-// WILDCARD
-app.get('{*splat}', (req, res, next) => {
-    if (req.path.startsWith('/api-docs')) {
-        return next();
-    }
-    res.redirect('/api-docs');
-})
-
 db.mongoose
     .connect(db.url)
     .then(() => {
@@ -42,6 +35,22 @@ db.mongoose
         process.exit();
     });
 
+// 404 handler 
+app.use((req,res,next) => {
+    next(createError.NotFound());
+})
+
+// ERROR HANDLER
+
+app.use((err, req, res, next) => {
+    res.status(err.status || 500);
+    res.send({
+        error: {
+            status: err.status || 500,
+            message: err.message
+        }
+    });
+})
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}.`);
