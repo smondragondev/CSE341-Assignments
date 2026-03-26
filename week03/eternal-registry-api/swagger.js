@@ -15,7 +15,7 @@ const doc = {
     host: host,
     schemes: [schema],
     definitions: {
-        CreateAddBurialRecord: {
+        CreateUpdateBurialRecord: {
             $firstName: 'Margaret',
             $lastName: 'Thatcher',
             dateOfBirth: '1928-04-15',
@@ -28,6 +28,12 @@ const doc = {
             graveNumber: 4,
             lat: 1.123,
             lng: -1.232
+        },
+        CreateUpdateUser: {
+            $firstName: 'Margaret',
+            $lastName: 'Thatcher',
+            $email: 'example@email.com',
+            $password: '123456asdzxas**',
         }
     }
 }

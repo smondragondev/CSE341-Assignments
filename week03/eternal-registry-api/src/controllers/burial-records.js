@@ -4,7 +4,6 @@ const ObjectId = require("mongodb").ObjectId;
 const BSONError = require("mongodb/lib/bson").BSONError;
 const BurialRecord = db.burialRecords;
 const createError = require('http-errors');
-const mongoose = require('mongoose');
 
 exports.findAll = async (req, res, next) => {
     // #swagger.tags = ['Burial Records']
@@ -48,7 +47,7 @@ exports.create = async (req, res, next) => {
       #swagger.parameters['body'] = {
             in: 'body',
             description: 'Create a new Burial Record.',
-            schema: { $ref: '#/definitions/CreateAddBurialRecord' }
+            schema: { $ref: '#/definitions/CreateUpdateBurialRecord' }
     } */
     try {
         const burialRecord = BurialRecord(
@@ -69,7 +68,7 @@ exports.update = async (req, res, next) => {
         #swagger.parameters['body'] = {
                 in: 'body',
                 description: 'Update a new Burial Record.',
-                schema: { $ref: '#/definitions/CreateAddBurialRecord' }
+                schema: { $ref: '#/definitions/CreateUpdateBurialRecord' }
     } */
     try {
         const id = req.params.id;
