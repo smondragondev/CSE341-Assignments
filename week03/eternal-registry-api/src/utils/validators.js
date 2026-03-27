@@ -73,6 +73,87 @@ const burialRecordValidationRules = () => {
     ]
 }
 
+const userValidationRules = () => {
+    return [
+        body('firstName')
+            .notEmpty()
+            .withMessage('It should be not Empty')
+            .trim()
+            .escape()
+            .isString()
+            .withMessage('It should be a string'),
+        body('lastName')
+            .notEmpty()
+            .withMessage('It should be not Empty')
+            .trim()
+            .escape()
+            .isString()
+            .withMessage('It should be a string'),
+        body('email')
+            .notEmpty()
+            .withMessage('It should be not Empty')
+            .trim()
+            .escape()
+            .isEmail(),
+        body('password')
+            .notEmpty()
+            .withMessage('It should be not Empty')
+            .trim()
+            .escape()
+            .isStrongPassword({
+                minLength: 10,
+                minLowercase: 1,
+                minUppercase: 1,
+                minNumbers: 1,
+                minSymbols: 1,
+            })
+            .withMessage("Password does not meet requirements."),
+    ]
+}
+
+const workOrderValidationRules = () => {
+    return [
+        body('type')
+            .notEmpty()
+            .withMessage('It should be not Empty')
+            .trim()
+            .escape()
+            .isString()
+            .withMessage('It should be a string')
+            .custom((type) => {                
+                if (type !== 'maintenance' && type !== 'interment' && type !== 'other') {
+                    throw new Error("Please use a correct type: maintenance, interment or other")
+                }
+                return true;
+            }),
+        body('scheduledDate')
+            .notEmpty()
+            .withMessage('It should be not Empty')
+            .trim()
+            .escape()
+            .isDate(),
+        body('status')
+            .notEmpty()
+            .withMessage('It should be not Empty')
+            .trim()
+            .escape()
+            .isString()
+            .custom((status) => {                
+                if (status !== 'pending' && status !== 'completed' && status !== 'canceled') {
+                    throw new Error("Please use a correct status: pending, completed or canceled")
+                }
+                return true;
+            }),
+        body('assignedTo')
+            .notEmpty()
+            .withMessage('It should be not Empty')
+            .trim()
+            .escape()
+            .isString()
+            .withMessage('It should be a string'),
+    ]
+}
+
 const validate = (req, res, next) => {
     const errors = validationResult(req);
     if (errors.isEmpty()) {
@@ -88,5 +169,7 @@ const validate = (req, res, next) => {
 
 module.exports = { 
     burialRecordValidationRules,
+    userValidationRules,
+    workOrderValidationRules,
     validate,
 }

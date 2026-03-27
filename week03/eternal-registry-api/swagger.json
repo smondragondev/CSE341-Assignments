@@ -21,9 +21,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       },
@@ -39,7 +36,7 @@
             "in": "body",
             "description": "Create a new Burial Record.",
             "schema": {
-              "$ref": "#/definitions/CreateAddBurialRecord"
+              "$ref": "#/definitions/CreateUpdateBurialRecord"
             }
           }
         ],
@@ -49,9 +46,6 @@
           },
           "422": {
             "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
@@ -74,12 +68,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       },
@@ -101,7 +89,7 @@
             "in": "body",
             "description": "Update a new Burial Record.",
             "schema": {
-              "$ref": "#/definitions/CreateAddBurialRecord"
+              "$ref": "#/definitions/CreateUpdateBurialRecord"
             }
           }
         ],
@@ -111,9 +99,6 @@
           },
           "422": {
             "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       },
@@ -134,9 +119,230 @@
         "responses": {
           "204": {
             "description": "No Content"
+          }
+        }
+      }
+    },
+    "/users/": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Find all the Users",
+        "description": "It retrieves data from the User",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create a User",
+        "description": "Create a new a User",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Create a new User.",
+            "schema": {
+              "$ref": "#/definitions/CreateUpdateUser"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Find a record by ID",
+        "description": "It retrieves data from the User using the ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update a User",
+        "description": "Update data from the User",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update a new User.",
+            "schema": {
+              "$ref": "#/definitions/CreateUpdateUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete a User",
+        "description": "Delete a User using the ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/work-orders/": {
+      "get": {
+        "tags": [
+          "Work Orders"
+        ],
+        "summary": "Find all the Work Orders",
+        "description": "It retrieves data from the Work Orders",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Work Orders"
+        ],
+        "summary": "Create a Work Order",
+        "description": "Create a new a Work Order",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Create a new Work Order.",
+            "schema": {
+              "$ref": "#/definitions/CreateUpdateWorkOrder"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/work-orders/{id}": {
+      "get": {
+        "tags": [
+          "Work Orders"
+        ],
+        "summary": "Find a work order by ID",
+        "description": "It retrieves data from the Work Orders using the ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Work Orders"
+        ],
+        "summary": "Update a Work Order",
+        "description": "Update data from the Work Order",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update a new Work Order.",
+            "schema": {
+              "$ref": "#/definitions/CreateUpdateWorkOrder"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Work Orders"
+        ],
+        "summary": "Delete a Work Order",
+        "description": "Delete a Work Order using the ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
           }
         }
       }
@@ -153,7 +359,7 @@
     }
   },
   "definitions": {
-    "CreateAddBurialRecord": {
+    "CreateUpdateBurialRecord": {
       "type": "object",
       "properties": {
         "firstName": {
@@ -212,6 +418,60 @@
         "cemeteryName",
         "section",
         "block"
+      ]
+    },
+    "CreateUpdateWorkOrder": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "maintenance"
+        },
+        "scheduledDate": {
+          "type": "string",
+          "example": "2026-04-15"
+        },
+        "status": {
+          "type": "string",
+          "example": "pending"
+        },
+        "assignedTo": {
+          "type": "string",
+          "example": "Grounds Crew A"
+        }
+      },
+      "required": [
+        "type",
+        "scheduledDate",
+        "status",
+        "assignedTo"
+      ]
+    },
+    "CreateUpdateUser": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "example": "Margaret"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Thatcher"
+        },
+        "email": {
+          "type": "string",
+          "example": "example@email.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "123456asdzxAs**"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName",
+        "email",
+        "password"
       ]
     }
   }

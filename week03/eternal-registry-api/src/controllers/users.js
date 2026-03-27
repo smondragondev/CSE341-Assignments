@@ -2,7 +2,7 @@ const db = require('../models');
 const bcrypt = require("bcryptjs");
 const ObjectId = require('mongodb').ObjectId;
 const BSONError = require('mongodb/lib/bson').BSONError;
-const User = db.User;
+const User = db.users;
 const createError = require('http-errors');
 const { adaptBodyToUserSchema } = require('../utils/index')
 
@@ -51,15 +51,16 @@ exports.create = async (req, res, next) => {
             schema: { $ref: '#/definitions/CreateUpdateUser' }
     } */
     try {
-        const user = adaptBodyToUserSchema(req);
-        const hashedPassword = await bcrypt.hashSync(account_password, 10)
-        const User = User(
+        const userData = adaptBodyToUserSchema(req);
+        const hashedPassword = await bcrypt.hashSync(userData.password, 10);
+        // TODO: 
+        const user = User(
             {
-                ...user,
+                ...userData,
                 password: hashedPassword
             },
         )
-        await User.save();
+        await user.save();
         res.status(201).send();
     } catch (err) {
         next(err);
@@ -81,7 +82,7 @@ exports.update = async (req, res, next) => {
         const userId = new ObjectId(id);
         const filter = { '_id': userId };
         const user = adaptBodyToUserSchema(req);
-        const hashedPassword = await bcrypt.hashSync(account_password, 10)
+        const hashedPassword = await bcrypt.hashSync(user.password, 10)
         const updatedUser = {
             ...user,
             password: hashedPassword

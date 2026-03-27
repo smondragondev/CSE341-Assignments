@@ -29,11 +29,17 @@ const doc = {
             lat: 1.123,
             lng: -1.232
         },
+        CreateUpdateWorkOrder:{
+            $type: 'maintenance',
+            $scheduledDate: '2026-04-15',
+            $status: 'pending',
+            $assignedTo: 'Grounds Crew A'
+        },
         CreateUpdateUser: {
             $firstName: 'Margaret',
             $lastName: 'Thatcher',
             $email: 'example@email.com',
-            $password: '123456asdzxas**',
+            $password: '123456asdzxAs**',
         }
     }
 }

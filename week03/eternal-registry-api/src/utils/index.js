@@ -31,3 +31,12 @@ exports.adaptBodyToUserSchema = (req) => {
         password: req.body.password,
     }
 }
+
+exports.adaptBodyToWorkOrderSchema = (req) => {
+    return {
+        type: req.body.type,
+        scheduledDate: req.body.scheduledDate,
+        status: req.body.status,
+        assignedTo: req.body.assignedTo,
+    }
+}

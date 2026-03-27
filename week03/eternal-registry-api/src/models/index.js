@@ -7,5 +7,7 @@ const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
 db.burialRecords = require('./burial-records.js')(mongoose);
+db.workOrders = require('./work-orders.js')(mongoose);
+db.users = require('./users.js')(mongoose);
 
 module.exports = db;
