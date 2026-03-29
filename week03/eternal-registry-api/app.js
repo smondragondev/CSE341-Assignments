@@ -5,6 +5,7 @@ const createError = require('http-errors')
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const passport = require('passport');
+const {origin} = require('./src/config/core.config');
 
 dotenv.config();
 
@@ -15,9 +16,6 @@ const store = new MongoDBStore({
   uri: db.url,
   collection: 'sessions'
 });
-const domain = process.env.DOMAIN || 'localhost'
-const isDevelopment = process.env.ENV == 'development';
-const origin = isDevelopment ? `http://${domain}:${port}` : `https://${domain}`;
 var corsOptions = {
     origin: origin
 };
