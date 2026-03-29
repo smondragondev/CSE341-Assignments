@@ -1,5 +1,4 @@
 const db = require('../models');
-const bcrypt = require("bcryptjs");
 const ObjectId = require('mongodb').ObjectId;
 const BSONError = require('mongodb/lib/bson').BSONError;
 const User = db.users;
@@ -52,14 +51,7 @@ exports.create = async (req, res, next) => {
     } */
     try {
         const userData = adaptBodyToUserSchema(req);
-        const hashedPassword = await bcrypt.hashSync(userData.password, 10);
-        // TODO: 
-        const user = User(
-            {
-                ...userData,
-                password: hashedPassword
-            },
-        )
+        const user = User(userData);
         await user.save();
         res.status(201).send();
     } catch (err) {
@@ -82,14 +74,9 @@ exports.update = async (req, res, next) => {
         const userId = new ObjectId(id);
         const filter = { '_id': userId };
         const user = adaptBodyToUserSchema(req);
-        const hashedPassword = await bcrypt.hashSync(user.password, 10)
-        const updatedUser = {
-            ...user,
-            password: hashedPassword
-        };
         const data = await User.findOneAndUpdate(
             filter,
-            updatedUser,
+            user,
             {
                 returnDocument: 'after'
             }

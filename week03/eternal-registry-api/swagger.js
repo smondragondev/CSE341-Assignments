@@ -40,6 +40,10 @@ const doc = {
             $lastName: 'Thatcher',
             $email: 'example@email.com',
             $password: '123456asdzxAs**',
+        },
+        LoginPassword: {
+            $email: 'example@email.com',
+            $password: '123456asdzxAs**',
         }
     }
 }

@@ -2,12 +2,19 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const createError = require('http-errors')
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+const passport = require('passport');
+
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 8080;
 const db = require('./src/models');
-
+const store = new MongoDBStore({
+  uri: db.url,
+  collection: 'sessions'
+});
 const domain = process.env.DOMAIN || 'localhost'
 const isDevelopment = process.env.ENV == 'development';
 const origin = isDevelopment ? `http://${domain}:${port}` : `https://${domain}`;
@@ -23,6 +30,22 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
+// SESSION
+app.use(
+    session(
+        {
+            secret: "a private key",
+            resave: false,
+            saveUninitialized: false,
+            store: store
+        }
+    )
+);
+
+app.use(passport.session());
+
+
+// ROUTES
 app.use('/', require('./src/routes'));
 
 db.mongoose
@@ -36,7 +59,7 @@ db.mongoose
     });
 
 // 404 handler 
-app.use((req,res,next) => {
+app.use((req, res, next) => {
     next(createError.NotFound());
 })
 

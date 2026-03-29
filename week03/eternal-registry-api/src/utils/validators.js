@@ -111,6 +111,23 @@ const userValidationRules = () => {
     ]
 }
 
+const loginValidationRules = () => {
+    return [
+        body('email')
+            .notEmpty()
+            .withMessage('It should be not Empty')
+            .trim()
+            .escape()
+            .isEmail(),
+        body('password')
+            .notEmpty()
+            .withMessage('It should be not Empty')
+            .trim()
+            .escape()
+            .isString(),            
+        ]
+};
+
 const workOrderValidationRules = () => {
     return [
         body('type')
@@ -120,7 +137,7 @@ const workOrderValidationRules = () => {
             .escape()
             .isString()
             .withMessage('It should be a string')
-            .custom((type) => {                
+            .custom((type) => {
                 if (type !== 'maintenance' && type !== 'interment' && type !== 'other') {
                     throw new Error("Please use a correct type: maintenance, interment or other")
                 }
@@ -138,7 +155,7 @@ const workOrderValidationRules = () => {
             .trim()
             .escape()
             .isString()
-            .custom((status) => {                
+            .custom((status) => {
                 if (status !== 'pending' && status !== 'completed' && status !== 'canceled') {
                     throw new Error("Please use a correct status: pending, completed or canceled")
                 }
@@ -167,9 +184,10 @@ const validate = (req, res, next) => {
     })
 }
 
-module.exports = { 
+module.exports = {
     burialRecordValidationRules,
     userValidationRules,
     workOrderValidationRules,
+    loginValidationRules,
     validate,
 }

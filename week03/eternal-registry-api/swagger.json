@@ -347,6 +347,47 @@
         }
       }
     },
+    "/auth/login/password": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Authentication module",
+        "description": "It authenticate a user using email and password",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Login using password",
+            "schema": {
+              "$ref": "#/definitions/LoginPassword"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Logout the user",
+        "description": "Logout the user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api-docs/": {
       "get": {
         "description": "",
@@ -470,6 +511,23 @@
       "required": [
         "firstName",
         "lastName",
+        "email",
+        "password"
+      ]
+    },
+    "LoginPassword": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "example@email.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "123456asdzxAs**"
+        }
+      },
+      "required": [
         "email",
         "password"
       ]
