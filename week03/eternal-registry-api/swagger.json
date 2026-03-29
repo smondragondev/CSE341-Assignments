@@ -374,6 +374,34 @@
         }
       }
     },
+    "/auth/github": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login using OAUTH2 with Github",
+        "description": "Login using OAUTH2 with Github",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/github/callback": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Callback for the OAUTH2 with Github",
+        "description": "Callback for the OAUTH2 with Github",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/auth/logout": {
       "post": {
         "tags": [

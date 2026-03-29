@@ -16,7 +16,7 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required: function() {
+        required: function () {
             return !this.githubId;
         }
     },
@@ -27,20 +27,16 @@ const userSchema = new Schema({
     },
     authProvider: {
         type: String,
-        enum: ['local','github'],
+        enum: ['local', 'github'],
         default: 'local',
     }
 });
 
-userSchema.pre('save', async function(next) {
-    if (!this.password || !this.isModified('password')) return next();
+userSchema.pre('save', async function () {
+    if (!this.password) return;
+    if (!this.isNew && !this.isModified('password')) return;
+    this.password = await bcrypt.hash(this.password, 10);
 
-    try{
-        this.password = await bcrypt.hash(this.password, 10);
-        next();
-    } catch (err){
-        next(err);
-    }
 });
 
 userSchema.methods.comparePassword = async function (newPassword) {
@@ -48,6 +44,6 @@ userSchema.methods.comparePassword = async function (newPassword) {
 }
 
 module.exports = (mongoose) => {
-    const User = mongoose.model('User',userSchema);
+    const User = mongoose.model('User', userSchema);
     return User;
 };

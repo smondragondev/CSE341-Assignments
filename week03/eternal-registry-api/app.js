@@ -41,7 +41,7 @@ app.use(
         }
     )
 );
-
+app.use(passport.initialize());
 app.use(passport.session());
 
 
@@ -65,7 +65,7 @@ app.use((req, res, next) => {
 
 // ERROR HANDLER
 
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
     res.status(err.status || 500);
     res.send({
         error: {
@@ -73,6 +73,7 @@ app.use((err, req, res) => {
             message: err.message
         }
     });
+    next();
 })
 
 app.listen(port, () => {
