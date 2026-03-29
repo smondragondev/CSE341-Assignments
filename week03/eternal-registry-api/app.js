@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
     session(
         {
-            secret: "a private key",
+            secret: process.env.SESSION_SECRET,
             resave: false,
             saveUninitialized: false,
             store: store
@@ -65,7 +65,7 @@ app.use((req, res, next) => {
 
 // ERROR HANDLER
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
     res.status(err.status || 500);
     res.send({
         error: {

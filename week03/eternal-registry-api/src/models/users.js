@@ -16,15 +16,28 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required: true,
+        required: function() {
+            return !this.githubId;
+        }
+    },
+    githubId: {
+        type: String,
+        unique: true,
+        sparse: true
+    },
+    authProvider: {
+        type: String,
+        enum: ['local','github'],
+        default: 'local',
     }
 });
 
 userSchema.pre('save', async function(next) {
-    if (!this.isModified('password')) return next();
+    if (!this.password || !this.isModified('password')) return next();
 
     try{
-        this.password = await bcrypt.hashSync(this.password, 10);
+        this.password = await bcrypt.hash(this.password, 10);
+        next();
     } catch (err){
         next(err);
     }
