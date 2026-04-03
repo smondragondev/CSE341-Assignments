@@ -46,6 +46,10 @@ app.use(passport.session());
 // ROUTES
 app.use('/', require('./src/routes'));
 
+app.get('/swagger.json', (req, res) => {
+    res.sendFile(__dirname + '/swagger.json');
+  });
+  
 db.mongoose
     .connect(db.url)
     .then(() => {
